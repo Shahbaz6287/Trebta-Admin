@@ -1,82 +1,73 @@
-// src/pages/Login/Login.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Form, Button, Alert } from "react-bootstrap";
-
-interface LoginState {
-  email: string;
-  password: string;
-  error: string | null;
-}
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/input";
 
 const Login: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
+  const validate = () => {
+    let isValid = true;
+    if (!email) {
+      setEmailError("Email is required");
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Email is invalid");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
 
-  // Single useState for all form fields and error
-  const [state, setState] = useState<LoginState>({
-    email: "",
-    password: "",
-    error: null,
-  });
+    if (!password) {
+      setPasswordError("Password is required");
+      isValid = false;
+    } else if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters");
+      isValid = false;
+    } else {
+      setPasswordError("");
+    }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    return isValid;
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    const { email, password } = state;
-    navigate("/");
-    // Simple validation check
-    if (email === "test@example.com" && password === "password") {
-      // Navigate to the home page on successful login
+  const handleLogin = () => {
+    if (validate()) {
+      // Handle login logic here
+      console.log("Email:", email);
+      console.log("Password:", password);
       navigate("/");
-    } else {
-      setState((prevState) => ({
-        ...prevState,
-        error: "Invalid email or password",
-      }));
     }
   };
 
   return (
-    <Container className="mt-4">
+    <div className="container mt-5">
       <h2>Login</h2>
-      {state.error && <Alert variant="danger">{state.error}</Alert>}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="text"
-            name="email"
-            placeholder="Enter email"
-            value={state.email}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword" className="mt-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={state.password}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit" className="mt-3">
-          Login
-        </Button>
-      </Form>
-    </Container>
+      <div className="mb-3">
+        <Input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={emailError}
+          className="mb-2"
+        />
+      </div>
+      <div className="mb-3">
+        <Input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          error={passwordError}
+          className="mb-2"
+        />
+      </div>
+      <Button text="Login" onClick={handleLogin} />
+    </div>
   );
 };
 
