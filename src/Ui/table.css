@@ -1,0 +1,24 @@
+/* Basic styling for pagination controls */
+.pagination {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination span {
+  margin: 0 1rem;
+}
