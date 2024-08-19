@@ -8,6 +8,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
   const navigate = useNavigate();
   const validate = () => {
     let isValid = true;
@@ -43,6 +44,10 @@ const Login: React.FC = () => {
     }
   };
 
+  const CancelhandleLogin = () => {
+    alert("I am Cancel Button");
+  };
+
   return (
     <div className="container mt-5">
       <h2>Login</h2>
@@ -66,7 +71,18 @@ const Login: React.FC = () => {
           className="mb-2"
         />
       </div>
-      <Button text="Login" onClick={handleLogin} />
+      <div className="row">
+        <div className="col-6">
+          <Button
+            className="btn-secondary float-start"
+            text="Cancel"
+            onClick={CancelhandleLogin}
+          />
+        </div>
+        <div className="col-6">
+          <Button text="Login" className=" float-end" onClick={handleLogin} />
+        </div>
+      </div>
     </div>
   );
 };
