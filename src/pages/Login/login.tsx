@@ -45,7 +45,7 @@ const Login: React.FC = () => {
   };
 
   const CancelhandleLogin = () => {
-    alert("I am Cancel Button");
+    navigate("/");
   };
 
   return (

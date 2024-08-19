@@ -6,7 +6,7 @@ const Footer: React.FC = () => (
     <Container>
       <Row>
         <Col className="text-center">
-          <p>&copy; 2024 My Website</p>
+          <p>&copy; 2024 Trebta</p>
         </Col>
       </Row>
     </Container>
