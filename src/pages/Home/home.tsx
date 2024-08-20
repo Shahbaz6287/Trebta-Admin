@@ -1,5 +1,6 @@
 import ResponsiveBreakpointsExample from "../../Ui/table";
 import "./home.css";
+import SummaryComponenty from "./summary-component";
 
 interface User {
   id: number;
@@ -29,11 +30,16 @@ const Home = () => {
           <h1 className="center">Hello I am Home Page</h1>
         </div>
       </div>
-      <ResponsiveBreakpointsExample<User>
-        columns={columns}
-        data={data}
-        itemsPerPage={2}
-      />
+      <section>
+        <SummaryComponenty />
+      </section>
+      <section>
+        <ResponsiveBreakpointsExample<User>
+          columns={columns}
+          data={data}
+          itemsPerPage={2}
+        />
+      </section>
     </>
   );
 };
